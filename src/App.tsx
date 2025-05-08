@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { TodoList } from './components/TodoList';
 
 export const App = () => {
-  const [newTodo, setNewTodo] = useState(todosFromServer);
+  const [todos, setTodos] = useState(todosFromServer);
   const [selectedUserId, setSelectedUserId] = useState('0');
   const [title, setTitle] = useState('');
   const [errorTitle, setErrorTitle] = useState(false);
@@ -15,7 +15,7 @@ export const App = () => {
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    const maxId = Math.max(...newTodo.map(todo => todo.id));
+    const maxId = Math.max(...todos.map(todo => todo.id));
     const isTitleValid = title.trim() !== '';
     const isUserValid = selectedUserId !== '0';
 
@@ -30,7 +30,7 @@ export const App = () => {
         userId: Number(selectedUserId),
       };
 
-      setNewTodo(prev => [...prev, newItem]);
+      setTodos(prev => [...prev, newItem]);
 
       setTitle('');
       setSelectedUserId('0');
@@ -47,6 +47,7 @@ export const App = () => {
             value={title}
             type="text"
             data-cy="titleInput"
+            placeholder="Please enter a title"
             onChange={event => {
               setTitle(event.target.value);
               setErrorTitle(false);
@@ -83,7 +84,7 @@ export const App = () => {
         </button>
       </form>
 
-      <TodoList todos={newTodo} />
+      <TodoList todos={todos} />
     </div>
   );
 };

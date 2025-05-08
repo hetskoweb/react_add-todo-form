@@ -14,7 +14,9 @@ type NewTodoProps = {
 export const TodoList: React.FC<NewTodoProps> = ({ todos }) => {
   return (
     <section className="TodoList">
-      <TodoInfo todos={todos} />
+      {todos.map(todo => (
+        <TodoInfo key={todo.id} todo={todo} />
+      ))}
     </section>
   );
 };
