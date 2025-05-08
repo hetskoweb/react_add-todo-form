@@ -16,9 +16,9 @@ export const TodoInfo: React.FC<Props> = ({ todos }) => {
   return (
     <>
       {todos.map(todo => {
-        const userId = usersFromServer.find(user => user.id === todo.userId);
+        const user = usersFromServer.find(userId => userId.id === todo.userId);
 
-        if (!userId) {
+        if (!user) {
           return null;
         }
 
@@ -30,7 +30,7 @@ export const TodoInfo: React.FC<Props> = ({ todos }) => {
           >
             <h2 className="TodoInfo__title">{todo.title}</h2>
 
-            <UserInfo user={userId} />
+            <UserInfo user={user} />
           </article>
         );
       })}
